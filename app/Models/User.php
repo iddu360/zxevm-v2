@@ -19,8 +19,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -44,5 +46,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function bookmarks()
+    {
+        return $this->belongsToMany(Event::class, 'bookmarks');
+    }
+
+    public function likes()
+    {
+        return $this->belongsToMany(Event::class, 'likes');
     }
 }
